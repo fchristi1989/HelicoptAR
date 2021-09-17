@@ -5,6 +5,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
+// Class handling the menu panels:
+// -> Vehicle selection
+// -> Starting the AR scene
+// -> Return to main menu
 public class MenuHandler : MonoBehaviour
 {
     private const int HELISTOSELECT = 4;
@@ -47,6 +52,7 @@ public class MenuHandler : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    // Switch helicopter
     public void OnMenuLeft()
     {
         if (currentSelection == 0)
@@ -56,6 +62,7 @@ public class MenuHandler : MonoBehaviour
         UpdateSelection();
     }
 
+    // Switch helicopter
     public void OnMenuRight()
     {
         if (currentSelection == HELISTOSELECT - 1)
@@ -65,6 +72,7 @@ public class MenuHandler : MonoBehaviour
         UpdateSelection();
     }
 
+    // Select a new helicopter type
     private void UpdateSelection()
     {
 
