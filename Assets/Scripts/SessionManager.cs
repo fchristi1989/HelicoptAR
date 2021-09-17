@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 
+
+// Class to manage the AR session
 public class SessionManager : MonoBehaviour
 {
 
@@ -22,6 +24,7 @@ public class SessionManager : MonoBehaviour
     }
 
     // Update is called once per frame
+    // Check for initial helicopter positioning
     void Update()
     {
         if (vehiclePlaced)
@@ -52,6 +55,7 @@ public class SessionManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    // Toggle visualisation of detected surfaces: Unused feature at the moment
     public void OnToggleSurface()
     {
         ARPlaneManager manager = FindObjectOfType(typeof(ARPlaneManager)) as ARPlaneManager;

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// Rotation around Y-Axis
 public class RotorBehaviourUp : MonoBehaviour
 {
     // Start is called before the first frame update

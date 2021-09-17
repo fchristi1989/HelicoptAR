@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// CLass to control the helicopter
 public class StandardHeliBehaviour : MonoBehaviour
 {
 
@@ -14,6 +15,8 @@ public class StandardHeliBehaviour : MonoBehaviour
 
     }
 
+
+    //TODO on next version: Set visibility to private
 
     public void OnThrustUpClicked(int direction)
     {
@@ -75,7 +78,7 @@ public class StandardHeliBehaviour : MonoBehaviour
 
     }
 
-
+    // Called by ButtonListener
     internal void ButtonPressed(string name)
     {
         switch (name)

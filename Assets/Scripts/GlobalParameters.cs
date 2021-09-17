@@ -1,4 +1,6 @@
 ﻿using System;
+
+// Global parameters shared across mutliple scenes
 public class GlobalParameters
 {
     private static int heliID = 0;

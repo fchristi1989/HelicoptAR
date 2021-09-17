@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 
+
+// Helper class for raycasts and AR raycasts
 public class Raycast
 {
     private ARRaycastManager aRRaycastManager;
@@ -12,6 +14,7 @@ public class Raycast
     private Quaternion targetRotation;
     private Vector2 screenPosition;
 
+    // ScreenPosition: starting point for raycasts
     public Raycast(ARRaycastManager aRRaycastManager, Vector2 screenPosition)
     {
         this.aRRaycastManager = aRRaycastManager;
@@ -20,12 +23,15 @@ public class Raycast
         Ray raycast = Camera.main.ScreenPointToRay(screenPosition);
         RaycastHit raycastHit;
 
+        // First check for raycast hits
         if (Physics.Raycast(raycast, out raycastHit))
         {
             target = raycastHit.collider.gameObject;
             targetPosition = raycastHit.point;
             targetRotation = raycastHit.collider.gameObject.transform.rotation;
         }
+
+        // Then check for AR raycast hits
         else
         {
             List<ARRaycastHit> aRRaycastHits = new List<ARRaycastHit>();
@@ -39,6 +45,7 @@ public class Raycast
         }
     }
 
+    // Null in case of AR raycast hit
     public GameObject Target
     {
         get

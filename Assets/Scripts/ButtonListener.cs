@@ -2,17 +2,20 @@
 using System.Collections;
 using UnityEngine.EventSystems;
 
+
+// Class attached to buttons to listen for pressing and releasing
 public class ButtonListener : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
 
     private bool buttonPressed;
 
-
+    // Called when button pressed
     public void OnPointerDown(PointerEventData eventData)
     {
         buttonPressed = true;
     }
 
+    // Called when button released
     public void OnPointerUp(PointerEventData eventData)
     {
         buttonPressed = false;
