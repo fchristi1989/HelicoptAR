@@ -8,14 +8,25 @@ public class StandardHeliBehaviour : MonoBehaviour
     private const float TURNINGSPEED = 0.002f;
     private const float SINKSPEED = 0.0005f;
 
+    private const float MAXSPEED = 1;
+    private const float COLLISIONMINSPEED = 0.2f;
 
-    protected Rigidbody rb;
+
+    private Rigidbody rb;
+    private AudioSource collisionSound;
 
 
     // Start is called before the first frame update
     public void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
+
+        // Important assumption:
+        // First AudioSource is rotor sound
+        // Second AudioSource is Collision Sound
+        AudioSource[] collisionSounds = gameObject.GetComponents<AudioSource>();
+        collisionSound = collisionSounds[1];
+        
 
     }
 
@@ -25,7 +36,7 @@ public class StandardHeliBehaviour : MonoBehaviour
 
     private void OnThrustUpClicked(int direction)
     {
-        if (rb.velocity.magnitude < 1 || rb.velocity.y < -1)
+        if (rb.velocity.magnitude < MAXSPEED || rb.velocity.y < -MAXSPEED)
         {
             Vector3 vector = transform.up * MOVINGSPEED * direction;
             rb.velocity += vector;
@@ -42,7 +53,7 @@ public class StandardHeliBehaviour : MonoBehaviour
         // Sink the helicopter
         rb.AddTorque(transform.right * SINKSPEED * direction);
 
-        if (rb.velocity.magnitude < 1)
+        if (rb.velocity.magnitude < MAXSPEED)
         {
             /*
             // Upward vector
@@ -124,6 +135,12 @@ public class StandardHeliBehaviour : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (rb.velocity.magnitude > COLLISIONMINSPEED)
+            collisionSound.Play();
     }
 
 }
