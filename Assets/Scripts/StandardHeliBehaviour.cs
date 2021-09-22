@@ -4,6 +4,10 @@ using System.Collections;
 // CLass to control the helicopter
 public class StandardHeliBehaviour : MonoBehaviour
 {
+    private const float MOVINGSPEED = 0.02f;
+    private const float TURNINGSPEED = 0.002f;
+    private const float SINKSPEED = 0.0005f;
+
 
     protected Rigidbody rb;
 
@@ -18,11 +22,12 @@ public class StandardHeliBehaviour : MonoBehaviour
 
     //TODO on next version: Set visibility to private
 
-    public void OnThrustUpClicked(int direction)
+
+    private void OnThrustUpClicked(int direction)
     {
         if (rb.velocity.magnitude < 1 || rb.velocity.y < -1)
         {
-            Vector3 vector = transform.up * -0.02f * direction * -1;
+            Vector3 vector = transform.up * MOVINGSPEED * direction;
             rb.velocity += vector;
         }
 
@@ -30,14 +35,23 @@ public class StandardHeliBehaviour : MonoBehaviour
 
     }
 
-
-    public void OnThrustForwardClicked(int direction)
+    // The idea is to not only let the heli go strait forward, but move him a litte diagonally downwards on the ling run to make adjustment necessary 
+    private void OnThrustForwardClicked(int direction)
     {
-        rb.AddTorque(transform.right * 0.002f * direction);
+
+        // Sink the helicopter
+        rb.AddTorque(transform.right * SINKSPEED * direction);
 
         if (rb.velocity.magnitude < 1)
         {
-            Vector3 vector = transform.forward * -0.02f * direction * -1;
+            /*
+            // Upward vector
+            Vector3 vector = transform.right * direction * DIAGONALSPEED;
+            rb.velocity += vector;
+            */
+
+            // Forward vector
+            Vector3 vector = transform.forward * MOVINGSPEED * direction;
             rb.velocity += vector;
         }
 
@@ -46,34 +60,34 @@ public class StandardHeliBehaviour : MonoBehaviour
     }
 
 
-    public void OnUpClicked()
+    private void OnUpClicked()
     {
-        rb.AddTorque(transform.right * 0.002f);
+        rb.AddTorque(transform.right * TURNINGSPEED);
 
 
 
     }
 
-    public void OnDownClicked()
+    private void OnDownClicked()
     {
-        rb.AddTorque(transform.right * 0.002f * -1);
+        rb.AddTorque(transform.right * TURNINGSPEED * -1);
 
 
 
     }
 
 
-    public void OnLeftClicked()
+    private void OnLeftClicked()
     {
-        rb.AddTorque(transform.up * 0.002f * -1);
+        rb.AddTorque(transform.up * TURNINGSPEED * -1);
 
 
 
     }
 
-    public void OnRightClicked()
+    private void OnRightClicked()
     {
-        rb.AddTorque(transform.up * 0.002f);
+        rb.AddTorque(transform.up * TURNINGSPEED);
 
 
     }
