@@ -2595,6 +2595,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heliPrefabs:
   - {fileID: 6335134328685964097, guid: 97841589fdd73436fa352ef0acdbbac2, type: 3}
+  - {fileID: 6335134328685964097, guid: 99a6a45be21254bf2af1052c6f784eaa, type: 3}
   - {fileID: 1218982320223226132, guid: c0a445b267bfc4b62ba493cde8c96d5c, type: 3}
   - {fileID: 1218982320223226132, guid: 64e388939c7034d6c8b89026223ffea2, type: 3}
   - {fileID: 1218982320223226132, guid: 3aa275c68f9d34c6a9297877eb57398a, type: 3}

@@ -12,10 +12,11 @@ using UnityEngine.UI;
 // -> Return to main menu
 public class MenuHandler : MonoBehaviour
 {
-    private const int HELISTOSELECT = 4;
+    private const int HELISTOSELECT = 5;
     private string[] descriptions = new string[]
     {
         "Red Razor - default test helicopter",
+        "Flying Saucer - UFO variant",
         "Sikorsky S-64 Skycrane - by Pavan Ganti",
         "Kamov KA-52 - by Pavan Ganti",
         "Eurocopter EC130B4 - by Pavan Ganti"
