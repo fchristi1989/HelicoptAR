@@ -5,7 +5,7 @@ using System.Collections;
 public class StandardHeliBehaviour : MonoBehaviour
 {
     private const float MOVINGSPEED = 0.02f;
-    private const float TURNINGSPEED = 0.002f;
+    private const float TURNINGSPEED = 0.003f;
     private const float SINKSPEED = 0.0005f;
 
     private const float MAXSPEED = 1;
