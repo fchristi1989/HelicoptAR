@@ -17,10 +17,12 @@ public class SessionManager : MonoBehaviour
     private GameObject dotsPrefab = null;
 
     private bool vehiclePlaced = false;
-    private bool surfaceViewed = true;
 
     private GameObject heli = null;
-    private GameObject dots = null;
+    private GameObject dotsGround = null;
+    //private GameObject dotsCeiling = null;
+    //private GameObject dotsForward = null;
+
     private Vector2 screenCenter;
     private ARRaycastManager aRRaycastManager = null;
 
@@ -28,8 +30,13 @@ public class SessionManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        dots = Instantiate(dotsPrefab);
-        dots.SetActive(false);
+        dotsGround = Instantiate(dotsPrefab);
+        dotsGround.SetActive(false);
+        /*dotsCeiling = Instantiate(dotsPrefab);
+        dotsCeiling.SetActive(false);
+        dotsForward = Instantiate(dotsForward);
+        dotsForward.SetActive(false);*/
+
         screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
     }
 
@@ -76,38 +83,21 @@ public class SessionManager : MonoBehaviour
         {            
             if (aRRaycastManager.Raycast(screenCenter, hits))
             {
-                dots.transform.position = hits[0].pose.position;
-                dots.SetActive(true);
+                dotsGround.transform.position = hits[0].pose.position;
+                dotsGround.SetActive(true);
             }
             else
-                dots.SetActive(false);
+                dotsGround.SetActive(false);
         }
         else
         {
-            List<ARRaycastHit> directions = new List<ARRaycastHit>();
-
-            AddDirection(-Vector3.up, directions);
-            AddDirection(Vector3.up, directions);
-
-            if (directions.Count == 0)
-                dots.SetActive(false);
-            else
-            {
-                ARRaycastHit nearest = directions[0];
-
-                foreach (ARRaycastHit hit in directions)
-                {
-                    if (hit.distance < nearest.distance)
-                        nearest = hit;
-                }
-
-                dots.transform.position = nearest.pose.position;
-                dots.SetActive(true);
-            }
+            SetDots(-Vector3.up, dotsGround);
+            //SetDots(Vector3.up, dotsCeiling);
+            //SetDots(heli.transform.forward, dotsForward);
         }
     }
 
-    private void AddDirection(Vector3 vector, List<ARRaycastHit> directions)
+    private void SetDots(Vector3 vector, GameObject dots)
     {
         List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
@@ -116,7 +106,15 @@ public class SessionManager : MonoBehaviour
         ray.direction = vector;
 
         if (aRRaycastManager.Raycast(ray, hits))
-            directions.Add(hits[0]);
+        {
+            dots.transform.position = hits[0].pose.position;
+            dots.transform.rotation = hits[0].pose.rotation;
+            dots.SetActive(true);
+        }
+        else
+        {
+            dots.SetActive(false);
+        }
     }
 
     public void OnMenuBack()
@@ -124,6 +122,7 @@ public class SessionManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    /*
     // Toggle visualisation of detected surfaces: Unused feature at the moment
     public void OnToggleSurface()
     {
@@ -159,5 +158,6 @@ public class SessionManager : MonoBehaviour
 
         }
     }
+    */
 
 }

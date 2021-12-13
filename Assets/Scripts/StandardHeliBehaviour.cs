@@ -7,14 +7,11 @@ public class StandardHeliBehaviour : MonoBehaviour
     private const float MOVINGSPEED = 0.02f;
     private const float TURNINGSPEED = 0.003f;
     private const float SINKSPEED = 0.0005f;
-
     private const float MAXSPEED = 1;
     private const float COLLISIONMINSPEED = 0.2f;
 
-
     private Rigidbody rb;
     private AudioSource collisionSound;
-
 
     // Start is called before the first frame update
     public void Start()
@@ -26,13 +23,7 @@ public class StandardHeliBehaviour : MonoBehaviour
         // Second AudioSource is Collision Sound
         AudioSource[] collisionSounds = gameObject.GetComponents<AudioSource>();
         collisionSound = collisionSounds[1];
-        
-
     }
-
-
-    //TODO on next version: Set visibility to private
-
 
     private void OnThrustUpClicked(int direction)
     {
@@ -41,9 +32,6 @@ public class StandardHeliBehaviour : MonoBehaviour
             Vector3 vector = transform.up * MOVINGSPEED * direction;
             rb.velocity += vector;
         }
-
-
-
     }
 
     // The idea is to not only let the heli go strait forward, but move him a litte diagonally downwards on the ling run to make adjustment necessary 
@@ -65,42 +53,27 @@ public class StandardHeliBehaviour : MonoBehaviour
             Vector3 vector = transform.forward * MOVINGSPEED * direction;
             rb.velocity += vector;
         }
-
-
-
     }
-
 
     private void OnUpClicked()
     {
         rb.AddTorque(transform.right * TURNINGSPEED);
-
-
-
     }
 
     private void OnDownClicked()
     {
         rb.AddTorque(transform.right * TURNINGSPEED * -1);
-
-
-
     }
 
 
     private void OnLeftClicked()
     {
         rb.AddTorque(transform.up * TURNINGSPEED * -1);
-
-
-
     }
 
     private void OnRightClicked()
     {
         rb.AddTorque(transform.up * TURNINGSPEED);
-
-
     }
 
     // Called by ButtonListener
